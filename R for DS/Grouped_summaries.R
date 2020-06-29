@@ -23,15 +23,16 @@ summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
 #> # … with 359 more rows
 
 names(flights)
-# the relationship between the distance and average delay for each location
-relation <- flights %>%
+# the by_destship between the distance and average delay for each location
+by_dest <- flights %>%
         group_by(dest) %>%
         summarise(
-                  count = n(), #to ignore data with small observations
+                  count = n(),
                   dist = mean(distance, na.rm = TRUE),
                   delay = mean(arr_delay, na.rm = TRUE)
-                  )
-relation <- filter(relation, count > 20, dest != "HNL")
-ggplot(data = relation, mapping = aes(x = dist, y = delay)) +
+                  ) %>%
+        filter(by_dest, count > 20, dest != "HNL")  #to ignore data with small observations
+
+ggplot(data = by_dest, mapping = aes(x = dist, y = delay)) +
         geom_point(aes(size = count), alpha = 1/3) +
         geom_smooth(se = FALSE)

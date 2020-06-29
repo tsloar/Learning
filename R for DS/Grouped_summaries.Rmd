@@ -1,5 +1,5 @@
 ---
-title: "Gruped_summaries with summaries"
+title: "Grouped summaries with summaries ()"
 author: "Tetiana Matviichuk"
 date: "26 06 2020"
 output: html_document
