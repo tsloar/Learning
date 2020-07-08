@@ -36,3 +36,21 @@ by_dest <- flights %>%
 ggplot(data = by_dest, mapping = aes(x = dist, y = delay)) +
         geom_point(aes(size = count), alpha = 1/3) +
         geom_smooth(se = FALSE)
+
+nycflights13::flights
+data(flights)
+summary(flights)
+
+library(Lahman)
+
+batting <- Lahman::Batting
+batters <- batting %>%
+        group_by(playerID) %>%
+        summarise(
+                ba = sum(H, na.rm = T)/sum(AB, na.rm = T),
+                ab = sum(AB, na.rm = T)
+        )
+
+batters %>%
+        ggplot(mapping = aes(x = ab, y = ba)) +
+        geom_point(aes(color = ab), alpha = 1/10)
